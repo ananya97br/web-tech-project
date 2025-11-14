@@ -1,0 +1,163 @@
+/*.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}*/
+
+.plan-box {
+  background: #9cc2c3;
+  padding: 2rem;
+  border-radius: 2rem;
+  width: 60vw;
+  margin: 2rem auto;
+}
+.plan-box input {
+  background: #ddeeee;
+  border-radius: 1rem;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin-left: 1rem;
+}
+.plan-box button {
+  margin: 1rem 1rem 0 0;
+  border-radius: 1rem;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  background: #3a5454;
+  color: white;
+  cursor: pointer;
+}
+.plan-box button[style*="pink"] {
+  background: #f9bbbe;
+  color: black;
+}
+
+/* AddPost styles to match the provided mockup */
+.add-post-container {
+  width: 90%;
+  max-width: 1100px;
+  margin: 1.5rem auto;
+}
+.add-post-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #234;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.add-post-header .plus {
+  display: inline-block;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  background: #356b6b;
+  color: #fff;
+  text-align: center;
+  line-height: 2.2rem;
+  font-size: 1.4rem;
+}
+
+.add-post-card {
+  margin-top: 1rem;
+  background: #b9d8d9;
+  border-radius: 1.25rem;
+  padding: 2.25rem;
+  box-sizing: border-box;
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+}
+.add-post-card .row {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  align-items: center;
+  gap: 1rem;
+}
+.left-label {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: #234f50;
+  padding-left: 0.5rem;
+}
+.input-field {
+  background: #e9f6f6;
+  border-radius: 1rem;
+  border: 1px solid rgba(0,0,0,0.12);
+  padding: 0.75rem 1rem;
+  font-size: 1.05rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+.textarea-field {
+  min-height: 10rem;
+  resize: vertical;
+}
+.plan-select-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.plan-select-wrap .maybe {
+  font-size: 0.85rem;
+  color: rgba(0,0,0,0.55);
+}
+.actions { 
+  margin-top: 0.5rem;
+}
+.post-btn {
+  justify-self: end;
+  background: #f7d6cf;
+  border: none;
+  padding: 0.8rem 2.2rem;
+  border-radius: 2rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #1d3a3a;
+  cursor: pointer;
+}
+.message {
+  grid-column: 1 / -1;
+  color: #103030;
+  font-weight: 600;
+}
+
+@media (max-width: 720px) {
+  .add-post-card .row { grid-template-columns: 1fr; }
+  .left-label { font-size: 1.25rem; }
+  .post-btn { justify-self: start; }
+}
+
