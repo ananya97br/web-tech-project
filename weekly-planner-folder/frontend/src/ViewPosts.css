@@ -1,0 +1,212 @@
+.posts-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.posts-title {
+  color: #234f50;
+  font-size: 1.75rem;
+  margin: 0 0 1.5rem 0;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.posts-error {
+  background: #ffebee;
+  color: #c62828;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.posts-actions {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.refresh-btn {
+  background: #9cc2c3;
+  border: 2px solid #7a9a9a;
+  color: #1d3a3a;
+  padding: 0.6rem 1.5rem;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.refresh-btn:hover:not(:disabled) {
+  background: #7a9a9a;
+  color: #fff;
+}
+
+.refresh-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.posts-loading {
+  text-align: center;
+  color: #234f50;
+  font-size: 1.1rem;
+  padding: 2rem;
+}
+
+.posts-empty {
+  background: #e9f6f6;
+  border: 2px dashed #9cc2c3;
+  border-radius: 1rem;
+  padding: 2rem;
+  text-align: center;
+  color: #4a6f70;
+  font-size: 1.1rem;
+}
+
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+.post-card {
+  background: #b9d8d9;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: all 0.3s ease;
+}
+
+.post-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.post-title {
+  color: #234f50;
+  font-size: 1.3rem;
+  margin: 0;
+  font-weight: 700;
+  word-break: break-word;
+}
+
+.post-achievement-badge {
+  background: #f7d6cf;
+  color: #1d3a3a;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.post-body {
+  color: #1d3a3a;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: 0;
+  flex-grow: 1;
+  word-break: break-word;
+}
+
+.post-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.post-date {
+  color: #4a6f70;
+  font-size: 0.85rem;
+}
+
+.delete-btn {
+  background: #f9bbbe;
+  color: #1d3a3a;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+}
+
+.delete-btn:hover {
+  background: #f5a3a6;
+  color: #fff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .posts-container {
+    width: 95%;
+  }
+
+  .posts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .post-card {
+    padding: 1rem;
+  }
+
+  .post-title {
+    font-size: 1.1rem;
+  }
+
+  .post-body {
+    font-size: 0.95rem;
+  }
+
+  .post-header {
+    flex-direction: column;
+  }
+
+  .post-plan-badge {
+    align-self: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .posts-title {
+    font-size: 1.4rem;
+  }
+
+  .post-card {
+    padding: 0.75rem;
+  }
+
+  .post-title {
+    font-size: 1rem;
+  }
+
+  .post-body {
+    font-size: 0.9rem;
+  }
+
+  .post-footer {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+
+  .delete-btn {
+    align-self: flex-start;
+  }
+}

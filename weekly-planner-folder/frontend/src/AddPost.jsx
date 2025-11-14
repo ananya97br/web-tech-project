@@ -2,25 +2,12 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import './AddPost.css'
 
-function AddPost({ username }) {
+function AddPost({ username, onPostCreated }) {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  const [plan, setPlan] = useState("");
-  const [plans, setPlans] = useState([]);
+  const [achievement, setAchievement] = useState("");
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState(""); // "success" or "error"
-
-  // Load plans when component mounts
-  useEffect(() => {
-    loadPlans();
-  }, [username]);
-
-  function loadPlans() {
-    axios
-      .get(`/plan/all/${encodeURIComponent(username)}`)
-      .then(res => setPlans(res.data || []))
-      .catch(err => console.log("Could not load plans"));
-  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,15 +19,18 @@ function AddPost({ username }) {
     }
 
     try {
-      await axios.post("/post", { username, title, body, plan: plan || null });
+      await axios.post("/post", { username, title, body, achievement: achievement || null });
       setMessage("Post created successfully!");
       setMessageType("success");
       setTitle("");
       setBody("");
-      setPlan("");
+      setAchievement("");
       
       // Clear message after 3 seconds
       setTimeout(() => setMessage(""), 3000);
+      
+      // Notify parent component to refresh posts
+      if (onPostCreated) onPostCreated();
     } catch (err) {
       setMessage("Error creating post. Please try again.");
       setMessageType("error");
@@ -76,22 +66,14 @@ function AddPost({ username }) {
         </div>
 
         <div className="row">
-          <label className="left-label">PLAN:</label>
-          <div className="plan-select-wrap">
-            <select
-              className="input-field"
-              value={plan}
-              onChange={(e) => setPlan(e.target.value)}
-            >
-              <option value="">-- Choose a plan (optional) --</option>
-              {plans.map(p => (
-                <option key={p.title} value={p.title}>
-                  {p.title}
-                </option>
-              ))}
-            </select>
-            <div className="maybe">(optional)</div>
-          </div>
+          <label className="left-label">ACHIEVEMENT:</label>
+          <input
+            className="input-field"
+            type="text"
+            placeholder="Enter achievement title"
+            value={achievement}
+            onChange={(e) => setAchievement(e.target.value)}
+          />
         </div>
 
         <div className="row actions">

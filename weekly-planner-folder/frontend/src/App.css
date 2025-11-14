@@ -155,6 +155,32 @@
   font-weight: 600;
 }
 
+/* Posts Tab Buttons */
+.posts-tab-btn {
+  background: #e9f6f6;
+  border: 2px solid #9cc2c3;
+  color: #234f50;
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.posts-tab-btn:hover {
+  background: #b9d8d9;
+  border-color: #7a9a9a;
+  color: #1d3a3a;
+}
+
+.posts-tab-btn.active {
+  background: #9cc2c3;
+  border-color: #7a9a9a;
+  color: #fff;
+  font-weight: 700;
+}
+
 @media (max-width: 720px) {
   .add-post-card .row { grid-template-columns: 1fr; }
   .left-label { font-size: 1.25rem; }

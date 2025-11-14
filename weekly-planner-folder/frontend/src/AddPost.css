@@ -38,17 +38,20 @@
 
 .row {
   display: grid;
-  grid-template-columns: 150px 1fr;
-  gap: 1.5rem;
-  align-items: flex-start;
-  margin-bottom: 1.5rem;
+  grid-template-columns: minmax(130px, 220px) 1fr;
+  gap: 1rem 1.5rem;
+  align-items: center;
+  margin-bottom: 1.25rem;
 }
 
 .left-label {
-  font-size: 1.75rem;
+  font-size: 1.05rem;
   font-weight: 700;
   color: #234f50;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.4px;
+  align-self: center;
+  padding-right: 0.25rem;
+  text-transform: uppercase;
 }
 
 .input-field {
@@ -167,10 +170,11 @@
   .row {
     grid-template-columns: 1fr;
     gap: 0.75rem;
+    align-items: stretch;
   }
 
   .left-label {
-    font-size: 1.25rem;
+    font-size: 1rem;
   }
 
   .input-field {
