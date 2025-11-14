@@ -1,22 +1,49 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import './AddPost.css'
 
 function AddPost({ username }) {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [plan, setPlan] = useState("");
+  const [plans, setPlans] = useState([]);
   const [message, setMessage] = useState("");
+  const [messageType, setMessageType] = useState(""); // "success" or "error"
+
+  // Load plans when component mounts
+  useEffect(() => {
+    loadPlans();
+  }, [username]);
+
+  function loadPlans() {
+    axios
+      .get(`/plan/all/${encodeURIComponent(username)}`)
+      .then(res => setPlans(res.data || []))
+      .catch(err => console.log("Could not load plans"));
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    if (!title.trim() || !body.trim()) {
+      setMessage("Please fill in title and body");
+      setMessageType("error");
+      return;
+    }
+
     try {
-      await axios.post("/post", { username, title, body, plan });
-      setMessage("Post created!");
+      await axios.post("/post", { username, title, body, plan: plan || null });
+      setMessage("Post created successfully!");
+      setMessageType("success");
       setTitle("");
       setBody("");
       setPlan("");
+      
+      // Clear message after 3 seconds
+      setTimeout(() => setMessage(""), 3000);
     } catch (err) {
-      setMessage("Error creating post.");
+      setMessage("Error creating post. Please try again.");
+      setMessageType("error");
     }
   };
 
@@ -30,6 +57,7 @@ function AddPost({ username }) {
           <input
             className="input-field"
             type="text"
+            placeholder="Enter post title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             required
@@ -40,6 +68,7 @@ function AddPost({ username }) {
           <label className="left-label">BODY:</label>
           <textarea
             className="input-field textarea-field"
+            placeholder="Enter post content"
             value={body}
             onChange={(e) => setBody(e.target.value)}
             required
@@ -54,11 +83,14 @@ function AddPost({ username }) {
               value={plan}
               onChange={(e) => setPlan(e.target.value)}
             >
-              <option value="">-- choose plan --</option>
-              <option value="plan1">Plan 1</option>
-              <option value="plan2">Plan 2</option>
+              <option value="">-- Choose a plan (optional) --</option>
+              {plans.map(p => (
+                <option key={p.title} value={p.title}>
+                  {p.title}
+                </option>
+              ))}
             </select>
-            <div className="maybe">(maybe...)</div>
+            <div className="maybe">(optional)</div>
           </div>
         </div>
 
@@ -67,7 +99,11 @@ function AddPost({ username }) {
           <button type="submit" className="post-btn">POST</button>
         </div>
 
-        {message && <div className="message">{message}</div>}
+        {message && (
+          <div className={`message ${messageType}`}>
+            {message}
+          </div>
+        )}
       </form>
     </div>
   );

@@ -15,16 +15,33 @@ router.get("/plans/:username", async (req, res) => {
   }
 });
 
+// GET: Fetch all posts for a user
+router.get("/:username", async (req, res) => {
+  try {
+    const { username } = req.params;
+    const db = await run();
+    const posts = await db.collection("posts").find({ username }).toArray();
+    res.json(posts);
+  } catch (err) {
+    console.error("Fetch posts error:", err);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
 // POST: Create a new post
 router.post("/", async (req, res) => {
   try {
-    const { username, title, body, planTitle } = req.body;
+    const { username, title, body, plan } = req.body;
     if (!username || !title || !body) {
       return res.status(400).json({ message: "Missing required fields" });
     }
     const db = await run();
     const result = await db.collection("posts").insertOne({
-      username, title, body, planTitle
+      username,
+      title,
+      body,
+      plan: plan || null,
+      createdAt: new Date()
     });
     res.json({ message: "Post created", _id: result.insertedId });
   } catch (err) {

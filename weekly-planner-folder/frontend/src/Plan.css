@@ -1,0 +1,278 @@
+/* Plan Management Container */
+.plan-container {
+  width: 90%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.plan-header {
+  margin-bottom: 2rem;
+}
+
+.plan-header h2 {
+  color: #234f50;
+  font-size: 1.75rem;
+  margin: 0 0 1rem 0;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.plan-error {
+  background: #ffebee;
+  color: #c62828;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+/* Plans List */
+.plans-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid #b9d8d9;
+}
+
+.plan-btn {
+  background: #e9f6f6;
+  border: 2px solid #9cc2c3;
+  color: #234f50;
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.plan-btn:hover {
+  background: #b9d8d9;
+  border-color: #7a9a9a;
+  color: #1d3a3a;
+}
+
+.plan-btn.active {
+  background: #9cc2c3;
+  border-color: #7a9a9a;
+  color: #fff;
+  font-weight: 700;
+}
+
+.plan-add-btn {
+  background: #356b6b;
+  border-color: #234f50;
+  color: #fff;
+  font-weight: 700;
+}
+
+.plan-add-btn:hover {
+  background: #234f50;
+  border-color: #1d3a3a;
+}
+
+/* Plan Form Container */
+.plan-form-container {
+  background: #b9d8d9;
+  border-radius: 1.5rem;
+  padding: 2.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.plan-form-container h3 {
+  color: #234f50;
+  font-size: 1.4rem;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+
+.plan-form-group {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 1.5rem;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.plan-form-group label {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #234f50;
+  letter-spacing: 0.5px;
+}
+
+.plan-input {
+  background: #e9f6f6;
+  border: 2px solid #a5c7c8;
+  border-radius: 0.75rem;
+  padding: 0.65rem 0.95rem;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.plan-input:focus {
+  outline: none;
+  border-color: #7a9a9a;
+  box-shadow: 0 0 0 3px rgba(156, 194, 195, 0.2);
+}
+
+.plan-input.disabled {
+  background: #d4e9ea;
+  color: #234f50;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.plan-input:disabled {
+  background: #d4e9ea;
+  color: #234f50;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Plan Actions */
+.plan-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.plan-action-btn {
+  padding: 0.7rem 1.8rem;
+  border: none;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.plan-action-btn.save-btn {
+  background: #f7d6cf;
+  color: #1d3a3a;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.plan-action-btn.save-btn:hover {
+  background: #f5bfb1;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.plan-action-btn.edit-btn {
+  background: #9cc2c3;
+  color: #1d3a3a;
+  border: 2px solid #7a9a9a;
+}
+
+.plan-action-btn.edit-btn:hover {
+  background: #7a9a9a;
+  color: #fff;
+}
+
+.plan-action-btn.delete-btn {
+  background: #f9bbbe;
+  color: #1d3a3a;
+  border: 2px solid #f5a3a6;
+}
+
+.plan-action-btn.delete-btn:hover {
+  background: #f5a3a6;
+  color: #fff;
+}
+
+.plan-action-btn.cancel-btn {
+  background: #ccc;
+  color: #333;
+  border: 2px solid #999;
+}
+
+.plan-action-btn.cancel-btn:hover {
+  background: #bbb;
+  color: #000;
+}
+
+/* Empty State */
+.plan-empty {
+  background: #e9f6f6;
+  border: 2px dashed #9cc2c3;
+  border-radius: 1rem;
+  padding: 2rem;
+  text-align: center;
+  color: #4a6f70;
+  font-size: 1.1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .plan-container {
+    width: 95%;
+  }
+
+  .plan-form-container {
+    padding: 1.5rem;
+  }
+
+  .plan-form-group {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .plan-form-group label {
+    font-size: 0.9rem;
+  }
+
+  .plan-input {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.95rem;
+  }
+
+  .plans-list {
+    gap: 0.5rem;
+  }
+
+  .plan-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .plan-actions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .plan-action-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .plan-header h2 {
+    font-size: 1.4rem;
+  }
+
+  .plan-form-group label {
+    font-size: 0.85rem;
+  }
+
+  .plan-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+
+  .plan-action-btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+}
