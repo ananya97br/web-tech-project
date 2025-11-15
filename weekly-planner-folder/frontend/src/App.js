@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import './Navbar.css';
 import './App.css';
-import { BrowserRouter as Router, Route, Routes, Navigate, useNavigate, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate, useNavigate, useLocation, Link } from "react-router-dom";
 import AddPost from "./AddPost"; // Your existing Post component
 import ViewPosts from "./ViewPosts";
 import ViewEditPlan from "./ViewEditPlan"; // Your existing Plan component
@@ -12,6 +12,7 @@ import ProfilePage from "./ProfilePage";
 function SignupPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
@@ -33,34 +34,46 @@ function SignupPage() {
   }
 
   return (
-    <div>
-      <h2>Signup</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Username</label>
-          <br />
-          <input
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>Password</label>
-          <br />
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit">Signup</button>
-      </form>
-      {message && <p>{message}</p>}
-      <p>
-        Already have an account? <Link to="/login">Login here</Link>
-      </p>
+    <div className="auth-page">
+      <div className="auth-card">
+        <h2 className="auth-title">SIGN UP</h2>
+        <form onSubmit={handleSubmit} className="auth-form">
+          <div className="auth-input-group">
+            <label className="auth-label">Username</label>
+            <input
+              className="auth-input"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+          </div>
+          <div className="auth-input-group">
+            <label className="auth-label">Password</label>
+            <input
+              className="auth-input"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          <div className="auth-input-group">
+            <label className="auth-label">Confirm</label>
+            <input
+              className="auth-input"
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+            />
+          </div>
+          <button type="submit" className="auth-button">SIGN UP</button>
+        </form>
+        {message && <p className="auth-message">{message}</p>}
+        <p className="auth-link">
+          Have An Account? <Link to="/login">Login</Link>
+        </p>
+      </div>
     </div>
   );
 }
@@ -90,66 +103,77 @@ function LoginPage({ onLogin }) {
   }
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Username</label>
-          <br />
-          <input
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>Password</label>
-          <br />
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit">Login</button>
-      </form>
-      {message && <p>{message}</p>}
-      <p>
-        No account? <Link to="/signup">Signup here</Link>
-      </p>
+    <div className="auth-page">
+      <div className="auth-card">
+        <h2 className="auth-title">LOGIN</h2>
+        <form onSubmit={handleSubmit} className="auth-form">
+          <div className="auth-input-group">
+            <label className="auth-label">Username</label>
+            <input
+              className="auth-input"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+          </div>
+          <div className="auth-input-group">
+            <label className="auth-label">Password</label>
+            <input
+              className="auth-input"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          <button type="submit" className="auth-button">LOGIN</button>
+        </form>
+        {message && <p className="auth-message">{message}</p>}
+        <p className="auth-link">
+          Don't Have An Account? <Link to="/signup">Sign up</Link>
+        </p>
+      </div>
     </div>
   );
 }
 
 function Dashboard({ username, onLogout }) {
-  const [view, setView] = useState("plan");
   const [postView, setPostView] = useState("add"); // "add" or "view"
   const [refreshPosts, setRefreshPosts] = useState(0);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const currentPath = location.pathname;
 
   return (
     <div className="app-container">
       <header className="header-navbar">
         <div className="navbar-left">
           <span 
-            className={view === "plan" ? "active" : ""} 
-            onClick={() => setView("plan")}
+            className={currentPath === "/dashboard/plan" ? "active" : ""} 
+            onClick={() => navigate("/dashboard/plan")}
             style={{ cursor: "pointer" }}
           >
             PLAN
           </span>
           <span 
-            className={view === "posts" ? "active" : ""} 
-            onClick={() => setView("posts")}
+            className={currentPath === "/dashboard/posts" ? "active" : ""} 
+            onClick={() => navigate("/dashboard/posts")}
             style={{ cursor: "pointer" }}
           >
             POSTS
           </span>
+          <span 
+            className={currentPath === "/dashboard/calories" ? "active" : ""} 
+            onClick={() => navigate("/dashboard/calories")}
+            style={{ cursor: "pointer" }}
+          >
+            CALORIES
+          </span>
         </div>
         <div className="navbar-center">
           <span 
-            className={view === "achievements" ? "active" : ""} 
-            onClick={() => setView("achievements")}
+            className={currentPath === "/dashboard/achievements" ? "active" : ""} 
+            onClick={() => navigate("/dashboard/achievements")}
             style={{ cursor: "pointer" }}
           >
             ACHIEVEMENTS
@@ -165,32 +189,35 @@ function Dashboard({ username, onLogout }) {
       </header>
 
       <main className="main-content">
-        {view === "plan" && <ViewEditPlan username={username} />}
-        {view === "posts" && (
-          <div>
-            <div style={{ marginBottom: "2rem", display: "flex", gap: "1rem" }}>
-              <button 
-                className={`posts-tab-btn ${postView === "add" ? "active" : ""}`}
-                onClick={() => setPostView("add")}
-              >
-                + Add Post
-              </button>
-              <button 
-                className={`posts-tab-btn ${postView === "view" ? "active" : ""}`}
-                onClick={() => setPostView("view")}
-              >
-                View All Posts
-              </button>
+        <Routes>
+          <Route path="/" element={<Navigate to="/dashboard/plan" replace />} />
+          <Route path="/plan" element={<ViewEditPlan username={username} />} />
+          <Route path="/posts" element={
+            <div>
+              <div style={{ marginBottom: "2rem", marginTop: "1rem", marginLeft: "1.1rem", marginRight: "1.1rem", display: "flex", gap: "1rem" }}>
+                <button 
+                  className={`posts-tab-btn ${postView === "add" ? "active" : ""}`}
+                  onClick={() => setPostView("add")}
+                >
+                  + Add Post
+                </button>
+                <button 
+                  className={`posts-tab-btn ${postView === "view" ? "active" : ""}`}
+                  onClick={() => setPostView("view")}
+                >
+                  View All Posts
+                </button>
+              </div>
+              {postView === "add" && <AddPost username={username} onPostCreated={() => {
+                setRefreshPosts(refreshPosts + 1);
+                setPostView("view");
+              }} />}
+              {postView === "view" && <ViewPosts username={username} refresh={refreshPosts} />}
             </div>
-            {postView === "add" && <AddPost username={username} onPostCreated={() => {
-              setRefreshPosts(refreshPosts + 1);
-              setPostView("view");
-            }} />}
-            {postView === "view" && <ViewPosts username={username} refresh={refreshPosts} />}
-          </div>
-        )}
-        {view === "calorie" && <CalorieTracker username={username} />}
-        {view === "achievements" && <ViewPosts username={username} refresh={refreshPosts} isAchievementsView={true} />}
+          } />
+          <Route path="/calories" element={<CalorieTracker username={username} />} />
+          <Route path="/achievements" element={<ViewPosts username={username} refresh={refreshPosts} isAchievementsView={true} />} />
+        </Routes>
       </main>
     </div>
   );
@@ -219,7 +246,7 @@ function App() {
           element={!user ? <LoginPage onLogin={setUser} /> : <Navigate to="/dashboard" />}
         />
         <Route
-          path="/dashboard"
+          path="/dashboard/*"
           element={user ? <Dashboard username={user} onLogout={handleLogout} /> : <Navigate to="/login" />}
         />
         <Route

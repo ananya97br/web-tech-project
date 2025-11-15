@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import './ViewPosts.css';
 
-function ViewPosts({ username, refresh }) {
+function ViewPosts({ username, refresh, isAchievementsView }) {
   const [posts, setPosts] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
@@ -35,7 +35,7 @@ function ViewPosts({ username, refresh }) {
 
   return (
     <div className="posts-container">
-      <h2 className="posts-title">ALL POSTS</h2>
+      <h2 className="posts-title">{isAchievementsView ? 'ACHIEVEMENTS' : 'ALL POSTS'}</h2>
       
       {error && <div className="posts-error">{error}</div>}
       
