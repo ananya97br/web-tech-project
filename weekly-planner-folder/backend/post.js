@@ -20,6 +20,7 @@ router.get("/:username", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const { username, title, body, achievement } = req.body;
+    //extracting the post data from the request JSON body
     if (!username || !title || !body) {
       return res.status(400).json({ message: "Missing required fields" });
     }

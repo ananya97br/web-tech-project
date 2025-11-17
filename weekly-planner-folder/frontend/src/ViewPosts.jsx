@@ -7,7 +7,7 @@ function ViewPosts({ username, refresh, isAchievementsView }) {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+  useEffect(() => {//whenever the user or the refresh its calls loadposts
     loadPosts();
   }, [username, refresh]);
 

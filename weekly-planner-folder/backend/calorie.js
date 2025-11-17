@@ -4,7 +4,7 @@ const express = require("express");
 const { MongoClient } = require("mongodb");
 
 const router = express.Router();
-const url = "mongodb://localhost:27017"; // Adjust MongoDB URI
+const url = "mongodb://localhost:27017";
 const dbName = "plannerDB";
 
 async function getDb() {
@@ -13,7 +13,6 @@ async function getDb() {
   return client.db(dbName);
 }
 
-// Add calorie entry
 router.post("/", async (req, res) => {
   try {
     const { username, calories } = req.body;
@@ -45,7 +44,7 @@ router.get("/:username", async (req, res) => {
     const collection = db.collection("calories");
 
     const entries = await collection.find({ username }).sort({ date: -1 }).toArray();
-    res.json(entries);
+    res.json(entries);//returning to frontend
   } catch (error) {
     console.error("Failed fetching calories:", error);
     res.status(500).json({ message: "Internal server error" });

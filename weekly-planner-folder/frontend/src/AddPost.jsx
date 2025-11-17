@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import './AddPost.css'
 
-function AddPost({ username, onPostCreated }) {
+function AddPost({ username, onPostCreated}) {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [achievement, setAchievement] = useState("");
@@ -13,6 +13,8 @@ function AddPost({ username, onPostCreated }) {
     e.preventDefault();
     
     if (!title.trim() || !body.trim()) {
+      //when the title and body are empty 
+      //giving an error message and then stop
       setMessage("Please fill in title and body");
       setMessageType("error");
       return;

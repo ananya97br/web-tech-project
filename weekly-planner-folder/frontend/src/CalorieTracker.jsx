@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 
 function CalorieTracker({ username }) {
-  const [calories, setCalories] = useState("");
-  const [log, setLog] = useState([]);
-  const [message, setMessage] = useState("");
-  const [weeklyCalories, setWeeklyCalories] = useState(0);
+  const [calories, setCalories] = useState("");//current calorie input
+  const [log, setLog] = useState([]);//array of calories
+  const [message, setMessage] = useState("");//message
+  const [weeklyCalories, setWeeklyCalories] = useState(0);//sum of calories
 
   useEffect(() => {
     fetchCalories();
@@ -18,9 +18,10 @@ function CalorieTracker({ username }) {
   };
 
   const fetchCalories = async () => {
+    //called once the component is added or the username changes
     try {
       const res = await fetch(`http://localhost:3001/calorie/${username}`, {
-        credentials: "include",
+        credentials: "include",//cookies
       });
       if (res.ok) {
         const data = await res.json();
@@ -35,6 +36,7 @@ function CalorieTracker({ username }) {
         weekEnd.setDate(weekStart.getDate() + 7);
         
         const weeklyTotal = data
+        //basically we are filtering the data so tht it is always between weekstart and weekend
           .filter(entry => {
             const entryDate = new Date(entry.date);
             return entryDate >= weekStart && entryDate < weekEnd;
@@ -79,7 +81,7 @@ function CalorieTracker({ username }) {
     }
   };
 
-  const handleKeyPress = (e) => {
+  const handleKeyPress = (e) => {//when user presses enter add the caloroes
     if (e.key === "Enter") {
       addCalories();
     }
@@ -118,11 +120,11 @@ function CalorieTracker({ username }) {
           <p className="no-entries">No entries yet. Start tracking your calories!</p>
         ) : (
           <div className="calorie-entries">
-            {log.map((entry, index) => (
+            {log.map((entry, index) => (//rruns thro the entries for each entry it renders the react element
               <div key={index} className="calorie-entry">
                 <div className="entry-calories">{entry.calories} kcal</div>
                 <div className="entry-date">
-                  {new Date(entry.date).toLocaleString('en-US', {
+                  {new Date(entry.date).toLocaleString('en-IN', {
                     month: 'short',
                     day: 'numeric',
                     year: 'numeric',

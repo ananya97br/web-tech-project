@@ -1,16 +1,16 @@
 
 
 const express = require("express");
-const { run } = require("./database.js");
+const { run } = require("./database.js");//helper to connect to mongodb
 const router = express.Router();
 
 // Get all plans for a user
-router.get("/all/:username", async (req, res) => {
+router.get("/all/:username", async (req, res) => {//all palns for a specific user
   try {
-    const { username } = req.params;
-    const db = await run();
+    const { username } = req.params;//fetch all docs from plan collections matching username
+    const db = await run();//connect to db
     const plans = await db.collection("plans").find({ username }).toArray();
-    res.json(plans);
+    res.json(plans);//sending it as a json response
   } catch (err) {
     res.status(500).json({ message: "Internal server error" });
   }
@@ -34,7 +34,7 @@ router.get("/:username/:title", async (req, res) => {
 });
 
 // Add a new plan
-router.post("/", async (req, res) => {
+router.post("/", async (req, res) => {//creates a new plan
   try {
     const { username, title, days } = req.body;
     if (!username || !title || !days) {
@@ -75,4 +75,4 @@ router.delete("/:username/:title", async (req, res) => {
   }
 });
 
-module.exports = router;
+module.exports = router;//exporting router

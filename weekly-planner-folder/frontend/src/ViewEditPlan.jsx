@@ -264,30 +264,30 @@ function ViewEditPlan({ username, title }) {
 export default ViewEditPlan;*/
 
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import axios from "axios";//used to send http requests to ur backend
 import './Plan.css';
 
 const daysOfWeek = [
   "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"
-];
-
+];//array
+//each plane is linked to current user
 function ViewEditPlan({ username }) {
-  const [plans, setPlans] = useState([]);
-  const [currentPlan, setCurrentPlan] = useState(null);
-  const [days, setDays] = useState({});
-  const [showAdd, setShowAdd] = useState(false);
-  const [newTitle, setNewTitle] = useState("");
-  const [error, setError] = useState("");
-  const [isEditing, setIsEditing] = useState(false);
+  const [plans, setPlans] = useState([]);//all plans
+  const [currentPlan, setCurrentPlan] = useState(null);//currentplan being viewed or edited
+  const [days, setDays] = useState({});//object storing each days activities
+  const [showAdd, setShowAdd] = useState(false);//add new plan
+  const [newTitle, setNewTitle] = useState("");//title of plan being created
+  const [error, setError] = useState("");//somethin goes wrong
+  const [isEditing, setIsEditing] = useState(false);//current plan to edit
 
   // Load all plans for user
   useEffect(() => {
-    loadPlans();
+    loadPlans();//getting all plans of user
   }, [username]);
 
   function loadPlans() {
     axios.get(`/plan/all/${encodeURIComponent(username)}`)
-      .then(res => setPlans(res.data || []))
+      .then(res => setPlans(res.data || []))//saves the list inside the plans storage
       .catch(() => setPlans([]));
   }
 
@@ -298,7 +298,7 @@ function ViewEditPlan({ username }) {
         setCurrentPlan(res.data);
         setDays(res.data.days || {});
         setError("");
-        setShowAdd(false);
+        setShowAdd(false);//disabled so tht it doesnt create issues
         setIsEditing(false);
       })
       .catch(() => setError("Could not load plan"));
@@ -322,15 +322,16 @@ function ViewEditPlan({ username }) {
       .catch(() => setError("Could not create plan. Title might already exist."));
   }
 
-  // Save edited plan
+  // Save edited plan basically save changes
   function handleSave() {
-    if (!currentPlan) return;
+    if (!currentPlan) return;//checking if there is a current selected plan
+    //put request to update plan on backend
     axios.put(`/plan/${encodeURIComponent(username)}/${encodeURIComponent(currentPlan.title)}`, { days })
       .then(() => {
         setCurrentPlan({ ...currentPlan, days });
         setIsEditing(false);
         setError("");
-        loadPlans();
+        loadPlans();//reload to show latest saved data
       })
       .catch(() => setError("Could not save plan"));
   }
@@ -350,7 +351,7 @@ function ViewEditPlan({ username }) {
     }
   }
 
-  // Handle day change during edit
+  // udates the specific day in days object
   function handleDayChange(day, value) {
     setDays(prev => ({ ...prev, [day]: value }));
   }
@@ -359,7 +360,7 @@ function ViewEditPlan({ username }) {
     <div className="plan-container">
       <div className="plan-header">
         <h2>PLAN MANAGEMENT</h2>
-        {error && <div className="plan-error">{error}</div>}
+       {error && <div className="plan-error">{error}</div>}
       </div>
 
       <div className="plans-list">
@@ -376,7 +377,7 @@ function ViewEditPlan({ username }) {
         >
           + Add New Plan
         </button>
-        {plans.map(p => (
+      {plans.map(p => (
           <button 
             key={p.title} 
             className={`plan-btn ${currentPlan?.title === p.title ? 'active' : ''}`}
@@ -386,7 +387,7 @@ function ViewEditPlan({ username }) {
           </button>
         ))}
       </div>
-
+  
       {showAdd ? (
         <div className="plan-form-container">
           <h3>Add New Plan</h3>
