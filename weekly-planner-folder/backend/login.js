@@ -13,6 +13,7 @@ router.post("/", async (req, res) => {
     const user = await users.findOne({ username, password });
     if (user) {
       req.session.username = user.username;
+      //session basically prevents the user from re-authenticating on every req
       res.json({ message: "okay", username:user.username });
     } else {
       res.status(401).json({ message: "no" });

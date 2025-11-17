@@ -7,10 +7,10 @@ const postRouter = require("./post");
 const signupRouter = require("./signup");
 const loginRouter = require("./login");
 const calorieRouter = require("./calorie");
-
+//CORS is basically used for frontend and backend communication
 const app = express();
-const PORT = 3001; // Your backend port, keep consistent everywhere
-
+const PORT = 3001; // backend runs here
+//Middleware set up
 app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 app.use(express.json());
 app.use(session({
@@ -19,6 +19,7 @@ app.use(session({
   saveUninitialized: false,
   cookie: { httpOnly: false, secure: false }
 }));
+//Router on its paths
 app.use("/signup", signupRouter);
 app.use("/login", loginRouter);
 
@@ -30,7 +31,7 @@ app.use("/calorie", calorieRouter);
 
 
 
-// Optional root route for quick checks
+//testing the server
 app.get("/", (req, res) => {
   res.send("Backend server is running.");
 });

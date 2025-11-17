@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import './Navbar.css';
 import './App.css';
 import { BrowserRouter as Router, Route, Routes, Navigate, useNavigate, useLocation, Link } from "react-router-dom";
-import AddPost from "./AddPost"; // Your existing Post component
+import AddPost from "./AddPost"; 
 import ViewPosts from "./ViewPosts";
-import ViewEditPlan from "./ViewEditPlan"; // Your existing Plan component
-import CalorieTracker from "./CalorieTracker"; // CalorieTracker component (create in same folder or adjust import)
+import ViewEditPlan from "./ViewEditPlan"; 
+import CalorieTracker from "./CalorieTracker"; 
 import ProfilePage from "./ProfilePage";
 
 function SignupPage() {
@@ -14,7 +14,7 @@ function SignupPage() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
-  const navigate = useNavigate();
+  const navigate = useNavigate();//used for redirecting the user
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -27,7 +27,7 @@ function SignupPage() {
 
     if (response.ok) {
       setMessage("Signup successful! Redirecting to login...");
-      setTimeout(() => navigate("/login"), 1500);
+      setTimeout(() => navigate("/login"), 1500);//to redirect to login after 1.5 sec
     } else {
       setMessage(data.message || "Signup failed");
     }
@@ -61,7 +61,7 @@ function SignupPage() {
             <label className="auth-label">Confirm</label>
             <input
               className="auth-input"
-              type="password"
+              type="password"//hides th characters
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
@@ -138,11 +138,11 @@ function LoginPage({ onLogin }) {
 }
 
 function Dashboard({ username, onLogout }) {
-  const [postView, setPostView] = useState("add"); // "add" or "view"
-  const [refreshPosts, setRefreshPosts] = useState(0);
+  const [postView, setPostView] = useState("add"); // to add the posts or view the posts
+  const [refreshPosts, setRefreshPosts] = useState(0);//refresh posts when a new post is added
   const navigate = useNavigate();
-  const location = useLocation();
-  const currentPath = location.pathname;
+  const location = useLocation();//access to current url
+  const currentPath = location.pathname;//stores current path 
 
   return (
     <div className="app-container">

@@ -1,8 +1,8 @@
 const { MongoClient } = require("mongodb");
-const url = "mongodb://localhost:27017"; // Your MongoDB connection string
+const url = "mongodb://localhost:27017";//MongoDB connection string
 const dbName = "plannerDB";
 
-let client; // Cache client to reuse
+let client; 
 
 async function run() {
   if (!client || !client.topology?.isConnected()) {
