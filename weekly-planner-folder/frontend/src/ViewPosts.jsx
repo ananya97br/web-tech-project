@@ -33,9 +33,15 @@ function ViewPosts({ username, refresh, isAchievementsView }) {
     }
   }
 
+  const visiblePosts = isAchievementsView
+    ? posts.filter(post => post.achievement)
+    : posts;
+
   return (
     <div className="posts-container">
-      <h2 className="posts-title">{isAchievementsView ? 'ACHIEVEMENTS' : 'ALL POSTS'}</h2>
+      <h2 className="posts-title">
+        {isAchievementsView ? 'ACHIEVEMENTS' : 'ALL POSTS'}
+      </h2>
       
       {error && <div className="posts-error">{error}</div>}
       
@@ -47,24 +53,32 @@ function ViewPosts({ username, refresh, isAchievementsView }) {
 
       {loading ? (
         <div className="posts-loading">Loading posts...</div>
-      ) : posts.length === 0 ? (
+      ) : visiblePosts.length === 0 ? (
         <div className="posts-empty">
           <p>No posts yet! Create one to get started.</p>
         </div>
       ) : (
         <div className="posts-grid">
-          {posts.map(post => (
+          {visiblePosts.map(post => (
             <div key={post._id} className="post-card">
               <div className="post-header">
                 <h3 className="post-title">{post.title}</h3>
-                {post.achievement && <span className="post-achievement-badge">{post.achievement}</span>}
+                {post.achievement && (
+                  <span className="post-achievement-badge">
+                    {post.achievement}
+                  </span>
+                )}
               </div>
+
               <p className="post-body">{post.body}</p>
+
               <div className="post-footer">
                 <small className="post-date">
-                  {post.createdAt && new Date(post.createdAt).toLocaleString()}
+                  {post.createdAt &&
+                    new Date(post.createdAt).toLocaleString()}
                 </small>
-                <button 
+
+                <button
                   className="delete-btn"
                   onClick={() => deletePost(post._id)}
                 >
@@ -80,3 +94,4 @@ function ViewPosts({ username, refresh, isAchievementsView }) {
 }
 
 export default ViewPosts;
+
